@@ -47,4 +47,4 @@ console.log("Bem vindo " + nome + "\n" + (mediaNotaFinalConsole = (notaConvertid
 //Criar tudo dentro do console.log ao invés de separar - Feito
 //Trocar imagem, estilizar o fundo - Feito
 //Tentar escrever na página o que esta escrito no console - Feito
-//Criar um conversor de temperatura
+//Criar um conversor de temperatura - Feito
