@@ -26,7 +26,6 @@ const mentalista = {
             this.variavel = chute;
             resultado.innerHTML = "O número secreto é maior que " + chute;
         }
-        console.log(this.numeroSecreto);
     },
     //Verificando se o usuário não apertou diversas vezes o botão após acertar o número
     Precoce: function () {
