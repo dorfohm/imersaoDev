@@ -8,7 +8,7 @@ const filmes = {
     testeExibir: document.getElementById("exibir"),
     adicionar: function () {
         let prompt = window.prompt("Insira algo");
-        if (listaFilmes.includes(prompt))return;
+        if (listaFilmes.includes(prompt))return; //Milagre
         exibir.innerHTML = "";
         listaFilmes.push(prompt);
         listaFilmes.forEach(element => {
