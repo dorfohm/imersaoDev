@@ -41,3 +41,7 @@ body > img {
 img {
   max-height: 250px;
 }
+
+img + img {
+  margin-left: 10px;
+}
