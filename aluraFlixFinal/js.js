@@ -8,7 +8,10 @@ const filmes = {
     testeExibir: document.getElementById("exibir"),
     adicionar: function () {
         let prompt = window.prompt("Insira algo");
-        if (listaFilmes.includes(prompt))return; //Milagre
+        if (listaFilmes.includes(prompt)){
+            alert("Imagem já existente");
+            return;
+        } //Milagre
         exibir.innerHTML = "";
         listaFilmes.push(prompt);
         listaFilmes.forEach(element => {
