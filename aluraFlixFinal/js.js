@@ -1,19 +1,22 @@
 var listaFilmes = ["https://br.web.img3.acsta.net/medias/nmedia/18/85/94/86/20078371.jpg", "https://animefire.net/img/animes/claymore-large.webp?v=1", "https://images-na.ssl-images-amazon.com/images/I/51Mm5G4Z6gL._SX372_BO1,204,203,200_.jpg"];
 
+const elementoExibir = document.getElementById("exibir");
+
 listaFilmes.forEach(element => {
-    exibir.innerHTML += `<img src =  "${element}">`
+    elementoExibir.innerHTML += `<img src =  "${element}">`
 })
 
 const filmes = {
-    testeExibir: document.getElementById("exibir"),
     adicionar: function () {
-        let prompt = window.prompt("Insira algo");
+        
+        let nomeFilme = window.prompt("Insira o nome do filme");
+        let linkFilme = window.prompt("Insira o link do filme");
         if (listaFilmes.includes(prompt)){
             alert("Imagem já existente");
             return;
         } //Milagre
         exibir.innerHTML = "";
-        listaFilmes.push(prompt);
+        listaFilmes.push(linkFilme);
         listaFilmes.forEach(element => {
             exibir.innerHTML += `<img src =  "${element}">`
         })
