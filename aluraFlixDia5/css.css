@@ -69,3 +69,9 @@ body {
 .textoImagem {
   text-align: justify;
 }
+
+.listaFilmes {
+  display: flex;
+  flex-wrap: wrap;
+  color: white;
+}
