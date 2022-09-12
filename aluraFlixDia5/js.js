@@ -2,22 +2,21 @@ var arrayFilmes = [];
 var arrayNomeFilmes = [];
 
 const elementoListaFilmes = document.getElementById("listaFilmes");
-const elementoLinkFilme = document.getElementById("filme");
 const elementoNomeFilme = document.getElementById("nomeFilme");
-const elementoImagemFilme = document.getElementById("imagemFilme");
+const elementoLinkFilme = document.getElementById("filme");
 
 const filmes = {
     adicionar: function () {
-        if (arrayFilmes.includes(elementoLinkFilme.value) || arrayNomeFilmes.includes(elementoNomeFilme.value)){
+        if (arrayFilmes.includes(elementoLinkFilme.value.trim()) || arrayNomeFilmes.includes(elementoNomeFilme.value.trim())){
             alert("Imagem/Nome já existente");
             return;
         }
         elementoListaFilmes.innerHTML = "";
         arrayFilmes.push(elementoLinkFilme.value);
         arrayNomeFilmes.push(elementoNomeFilme.value);
-        arrayFilmes.forEach((filme, nome) => {
-            const nomes = arrayNomeFilmes[nome];
-            elementoListaFilmes.innerHTML += `<div id="${nomes}" class = "imagemFilmes"> <img src =  "${filme}"> <p> ${nomes} </p> </div>`
+        arrayFilmes.forEach((filme, index) => {
+            const nome = arrayNomeFilmes[index];
+            elementoListaFilmes.innerHTML += `<div id="${nome}"> <img src =  "${filme}"> <p> ${nome} </p> </div>`
         });
         elementoLinkFilme.value = "";
         elementoNomeFilme.value = "";
@@ -26,17 +25,16 @@ const filmes = {
         let nomeSelecionado = prompt("Insira o nome"); 
         if(arrayNomeFilmes.includes(nomeSelecionado)) {
             posicaoDoNome = arrayNomeFilmes.indexOf(nomeSelecionado);
-            console.log(posicaoDoNome);
             arrayNomeFilmes.splice(posicaoDoNome, 1);
             arrayFilmes.splice(posicaoDoNome, 1);
-            var elem = document.getElementById(`${nomeSelecionado}`);
-            elem.remove();
+            document.getElementById(`${nomeSelecionado}`).remove();
         } else {
             alert("Nome não encontrado");
         }
-        arrayFilmes.forEach((filme, nome) => {
-            const nomes = arrayNomeFilmes[nome];
-            elementoListaFilmes.innerHTML += `<div id="imagemFilmes" class = "imagemFilmes"> <img src =  "${filme}"> <p> ${nomes} </p> </div>`
+        elementoListaFilmes.innerHTML = "";
+        arrayFilmes.forEach((filme, index) => {
+            const nome = arrayNomeFilmes[index];
+            elementoListaFilmes.innerHTML += `<div id="${nome}"> <img src =  "${filme}"> <p> ${nome} </p> </div>`
         });
     }
 }
