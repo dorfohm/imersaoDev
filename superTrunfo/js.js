@@ -1,6 +1,6 @@
 var carta1 = {
     nome: "Bulbassaur",
-    imagem: "http://4.bp.blogspot.com/-m4bEdJ5cCtI/VN-EdMQiq3I/AAAAAAAABFY/AywDiBRXkR0/s1600/1%2BBulba.png",
+    imagem: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
     atributos: {
     forca: 10000,
     ataque: 7000,
@@ -10,7 +10,7 @@ var carta1 = {
 };
 var carta2 = {
     nome: "Venusaur",
-    imagem: "http://2.bp.blogspot.com/-6Fy_orFYrOU/VN-E3waHrZI/AAAAAAAABHw/2Ei8NMRWZxQ/s1600/3%2BVenu.png",
+    imagem: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png",
     atributos: {
     forca: 30000,
     ataque: 2000,
@@ -20,7 +20,7 @@ var carta2 = {
 };
 var carta3 = {
     nome: "Charmander",
-    imagem: "http://4.bp.blogspot.com/-CtPFJZM_pVE/VN-FFOKeuLI/AAAAAAAABJA/cOCGqfwaBO4/s1600/4%2BChar.png",
+    imagem: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png",
     atributos: {
     forca: 25000,
     ataque: 5000,
@@ -32,7 +32,7 @@ var carta3 = {
 var cartas = [carta1, carta2, carta3];
 var cartaMaquina = 0;
 var cartaJogador = 0;
-
+var contador = 0;
 const elementoExibir = document.getElementById("cartaSorteada");
 
 function sortearCarta(){
@@ -45,23 +45,8 @@ function sortearCarta(){
     } 
     cartaJogador = cartas[numeroCartaJogador]; 
     console.log(cartaJogador);
-     
     document.getElementById("btnSortear").disabled = true;
-    document.getElementById("btnJogar").disabled = false;
-
-    elementoExibir.innerHTML += `<img src =  "${cartaJogador.imagem}">`
-
-
-    exibirOpcoes();
-}
-
-function exibirOpcoes(){
-    var opcoes = document.getElementById("opcoes");
-    var opcoesTexto = "";
-    for(var atributo in cartaJogador.atributos){
-        opcoesTexto += "<input type = 'radio' name = 'atributo' value = ' " + atributo + "'>" + atributo;
-    }
-    opcoes.innerHTML = opcoesTexto;
+    exibirCartaJogador();
 }
 
 function obtemAtributoSelecionado(){
@@ -73,18 +58,51 @@ function obtemAtributoSelecionado(){
     }
 }
 
+function selecionarUmAtributo(){ 
+    while(contador<1){
+        document.getElementById("btnJogar").disabled = false;
+        contador++;
+    }   
+}
+
 function jogar(){
     var atributoSelecionado = obtemAtributoSelecionado();
-    var elementoResultado = document.getElementById("resultado");
-    console.log(cartaJogador.atributos[atributoSelecionado]);
-    var valorCartaJogador = cartaJogador.atributos[atributoSelecionado];
-    var valorCartaMaquina = cartaMaquina.atributos[atributoSelecionado];
-    
-    if (valorCartaJogador > valorCartaMaquina){
-        elementoResultado.innerHTML = "Você venceu!"
-    } else if(valorCartaMaquina > valorCartaJogador){
-        elementoResultado.innerHTML = "Você perdeu, a carta da máquina é maior"
+    var divResultado = document.getElementById("resultado");
+
+    if (cartaJogador.atributos[atributoSelecionado] > cartaMaquina.atributos[atributoSelecionado]){
+        htmlResultado = "<p class='resultado-final'>Venceu</p>"
+    } else if(cartaJogador.atributos[atributoSelecionado] > cartaMaquina.atributos[atributoSelecionado]){
+        htmlResultado = "<p class='resultado-final'>Perdeu</p>"
     } else {
-        elementoResultado.innerHTML = "Empatou"
+        htmlResultado = "<p class='resultado-final'>Empatou</p>"
     }
+    divResultado.innerHTML = htmlResultado;
+    document.getElementById('btnJogar').disabled = true;
+    exibirCartaMaquina();
+}
+
+function exibirCartaJogador(){
+    var divCartaJogador = document.getElementById("carta-jogador");
+    divCartaJogador.style.backgroundImage = `url(${cartaJogador.imagem})`
+    var moldura = '<img src="https://www.alura.com.br/assets/img/imersoes/dev-2021/card-super-trunfo-transparent.png" style=" width:inherit; height:inherit; position:absolute;">';
+    var tagHtml = "<div id='opcoes' class='carta-status'>"
+    var opcoesTexto = "";
+    for(var atributo in cartaJogador.atributos){
+        opcoesTexto += "<input type = 'radio' onclick = 'selecionarUmAtributo()' name = 'atributo' value ='"+atributo+"'>"+atributo+" "+cartaJogador.atributos[atributo]+"<br>";
+    }
+    var nome = `<p class="carta-subtitle">${cartaJogador.nome}</p>`
+    divCartaJogador.innerHTML = moldura + nome + tagHtml + opcoesTexto + "</div>"
+}
+
+function exibirCartaMaquina(){
+    var divCartaMaquina = document.getElementById("carta-maquina");
+    divCartaMaquina.style.backgroundImage = `url(${cartaMaquina.imagem})`
+    var moldura = '<img src="https://www.alura.com.br/assets/img/imersoes/dev-2021/card-super-trunfo-transparent.png" style=" width:inherit; height:inherit; position:absolute;">';
+    var tagHtml = "<div id='opcoes' class='carta-status' >"
+    var opcoesTexto = "";
+    for(var atributo in cartaMaquina.atributos){
+        opcoesTexto += "<p type = 'text' style='margin-top: 15px; margin-bottom: 15px;' onclick = 'selecionarUmAtributo()' name = 'atributo' value ='"+atributo+"'>"+atributo+" "+cartaMaquina.atributos[atributo]+"</p>";
+    }
+    var nome = `<p class="carta-subtitle">${cartaMaquina.nome}</p>`
+    divCartaMaquina.innerHTML = moldura + nome + tagHtml + opcoesTexto + "</div>"
 }
